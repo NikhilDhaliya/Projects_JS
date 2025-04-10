@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="buttonA">Click me!</button>
+    <h3 id="headingA"></h3>
+    <script>
+        const button = document.querySelector("#buttonA");
+        const heading = document.querySelector("#headingA");
+        let count = 1;
+
+        button.onclick = () =>{
+            button.textContent = "Try again";
+            heading.textContent = `${count} clicks so far`
+            count++;
+        }
+    </script>
+</body>
+</html>
