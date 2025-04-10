@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+</head>
+
+<body>
+
+    <h1>Number Guessing Game</h1>
+    <p>We have selected a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you
+        if your guess was too high or too low.</p>
+    <label for="Guess">Enter a Guess:</label>
+    <input type="number" id="Guess">
+    <input type="submit" id="submitGuess" value="Submit Guess">
+    <p id="previousGuess"></p>
+    <p id="LastResult"></p>
+    <p id="RightWrong"></p>
+    <p id="LowHi"></p>
+
+    <script>
+        const guessInput = document.querySelector("#Guess");
+        const submitGuess = document.querySelector("#submitGuess");
+        const previousGuess = document.querySelector("#previousGuess");
+        const RW = document.querySelector("#RightWrong");
+        const lowHi = document.querySelector("#LowHi");
+        const lastResult = document.querySelector("#LastResult");
+
+        let guessCount = 1;
+        const randomNumber = Math.floor(Math.random() * 100 + 1);
+
+        function correctGuess() {
+            const userGuess = Number(guessInput.value);
+            
+            if (guessCount === 1) {
+                previousGuess.textContent = "Previous Guesses: ";
+            }
+            previousGuess.textContent += userGuess + " ";
+
+            if (userGuess === randomNumber) {
+                lastResult.textContent = "Congratulations! You have won the game!";
+                lastResult.style.backgroundColor = "green";
+                lowHi.textContent = "";
+                guessInput.disabled = true;
+                submitGuess.disabled = true;
+            } else if (guessCount === 10) {
+                lastResult.textContent = "Game Over! The number was " + randomNumber;
+                lastResult.style.backgroundColor = "red";
+                lowHi.textContent = "";
+                guessInput.disabled = true;
+                submitGuess.disabled = true;
+            } else {
+                lastResult.textContent = "Wrong!";
+                lastResult.style.backgroundColor = "red";
+                if (userGuess < randomNumber) {
+                    lowHi.textContent = "Last guess was too low!";
+                } else if (userGuess > randomNumber) {
+                    lowHi.textContent = "Last guess was too high!";
+                }
+
+                guessCount++;
+                guessInput.value = "";
+                guessInput.focus();
+            }
+        }
+
+        submitGuess.addEventListener("click", correctGuess);
+    </script>
+</body>
+
+</html>
