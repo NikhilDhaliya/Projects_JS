@@ -91,7 +91,7 @@
 <body>
     <div class="headings">
         <h2>
-            75 Attendance Calculator
+            Attendance Calculator
         </h2>
         <p>
             Find out the number of days you can bunk while still maintaining 75% attendance or the number of days you
@@ -149,18 +149,19 @@
             const presentDays = parseFloat(present.value);
             const totalDays = parseFloat(total.value);
             const requiredPercentage = parseFloat(percetageReq.value);
-
+            
             if (isNaN(presentDays) || isNaN(totalDays) || totalDays === 0) {
                 lecturesRequired.textContent = "Please enter valid numbers";
                 return;
             }
 
-            // Formula to calculate required lectures: (required% * total - present) / (100 - required%)
-            const additionalLectures = Math.ceil((requiredPercentage * totalDays - 100 * presentDays) / (100 - requiredPercentage));
-
-            if (additionalLectures <= 0) {
-                lecturesRequired.textContent = "You already have the required attendance!";
+            const currentPercentage = (presentDays / totalDays) * 100;
+            
+            if (currentPercentage >= requiredPercentage) {
+                const bunkableLectures = Math.floor((presentDays * 100 / requiredPercentage) - totalDays);
+                lecturesRequired.textContent = `You can bunk ${bunkableLectures} more lectures`;
             } else {
+                const additionalLectures = Math.ceil((requiredPercentage * totalDays - 100 * presentDays) / (100 - requiredPercentage));
                 lecturesRequired.textContent = `You need to attend ${additionalLectures} more lectures to reach ${requiredPercentage}%`;
             }
         }
