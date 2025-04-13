@@ -25,6 +25,7 @@ for (let img of fileNames) {
     newImage.setAttribute('src', `images/${img}`);
     newImage.setAttribute('alt', alternativeText[img]);
     thumbBar.appendChild(newImage);
+    thumbBar.appendChild(document.createElement('br'));
 }
 
 /* Wiring up the Darken/Lighten button */
