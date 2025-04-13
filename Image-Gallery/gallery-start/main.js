@@ -6,7 +6,7 @@ const overlay = document.querySelector('.overlay');
 
 /* Declaring the array of image filenames */
 
-const fileNames = ["pic1.jpg","pic2.jpg","pic3.jpg","pic4.jpg","pic5.jpg","pic1 copy.jpg"];
+const fileNames = ["pic1.jpg","pic2.jpg","pic3.jpg","pic4.jpg","pic5.jpg","pic1.jpg"];
 
 /* Declaring the alternative text for each image file */
 
@@ -16,7 +16,6 @@ const alternativeText = {
     "pic3.jpg" : "flowers",
     "pic4.jpg" : "ancient",
     "pic5.jpg" : "butterfly",
-    "pic1 copy.jpg" : "Eye copy"
 }
 
 /* Looping through images */
@@ -24,7 +23,7 @@ const alternativeText = {
 for (let img of fileNames) {
     const newImage = document.createElement('img');
     newImage.setAttribute('src', `images/${img}`);
-    newImage.setAttribute('alt', alternativeText[img] || 'Gallery image');
+    newImage.setAttribute('alt', alternativeText[img]);
     thumbBar.appendChild(newImage);
 }
 
