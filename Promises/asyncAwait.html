@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label for="name">Enter name :</label>
+    <input type="text" name="name" id="name">
+    <label for="delay">Delay in ms : </label>
+    <input type="numebr" name="delay" id="delay">
+    <button id="button">Alarm!</button>
+    <p id="output"></p>
+    <script>
+        const name = document.querySelector("#name");
+        const delay = document.querySelector("#delay");
+        const button = document.querySelector("#set-alarm");
+        const output = document.querySelector("#output");
+
+        function alarm(person, delay) {
+            return new Promise((resolve, reject) => {
+                if (delay < 0) {
+                    reject(new Error("Alarm delay must not be negative"));
+                    return;
+                }
+                setTimeout(() => {
+                    resolve(`Wake up, ${person}!`);
+                }, delay);
+            });
+        }
+
+        button.addEventListener("click", async () => {
+            try {
+                const message = await alarm(name.value, delay.value);
+                output.textContent = message;
+            } catch (error) {
+                output.textContent = `Couldn't set alarm: ${error}`;
+            }
+        });
+
+    </script>
+</body>
+
+</html>
